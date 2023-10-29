@@ -3,11 +3,35 @@ import os
 import pandas as pd
 import joblib as jb
 
-heading_style = '''
-<div style="color:red;" align='center'>
-<h1>Healthcare-dataset-stroke-data</h1>
-</div>
+glowing_text_style = '''
+    <style>
+        .glowing-text {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 33px;
+            text-align: center;
+            animation: glowing 2s infinite;
+        }
+        
+        @keyframes glowing {
+            0% { color: #FF9933; } /* Saffron color */
+            10% { color: #FFD700; } /* Gold color */
+            20% { color: #FF1493; } /* Deep Pink */
+            30% { color: #00FF00; } /* Lime Green */
+            40% { color: #FF4500; } /* Orange Red */
+            50% { color: #9400D3; } /* Dark Violet */
+            60% { color: #00BFFF; } /* Deep Sky Blue */
+            70% { color: #FF69B4; } /* Hot Pink */
+            80% { color: #ADFF2F; } /* Green Yellow */
+            90% { color: #1E90FF; } /* Dodger Blue */
+            100% { color: #FF9933; } /* Saffron color */
+        }
+    </style>
 '''
+
+
+st.markdown(glowing_text_style, unsafe_allow_html=True)
+st.markdown(f'<p class="glowing-text">Heart Stroke Classification</p>', unsafe_allow_html=True)
+
 def return_df(gender,age,hypertension,heart_disease,ever_married,work_type,Residence_type,avg_glucose_level,bmi,smoking_status):
 	kbn={
 	'gender':[gender],
@@ -27,7 +51,6 @@ def return_df(gender,age,hypertension,heart_disease,ever_married,work_type,Resid
 def base_model():
     bmodel=jb.load(os.path.join('finalized_nb_model (1).pkl'))
     return bmodel
-st.markdown(heading_style, unsafe_allow_html=True)
 gender=st.selectbox('Select your gender',['Male','Female'])
 age=st.number_input('Enter your age',min_value=0)
 hypertension=st.slider('hypertension',0,1,0)
